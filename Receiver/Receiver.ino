@@ -10,6 +10,8 @@
 
 int RECV_PIN = 11;
 
+int health = 8;
+
 IRrecv irrecv(RECV_PIN);
 
 decode_results results;
@@ -22,7 +24,10 @@ void setup()
 
 void loop() {
   if (irrecv.decode(&results)) {
-    Serial.println(results.value, HEX);
+    if (health > 0) {
+      --health;
+    }
+    Serial.println(health);
     irrecv.resume(); // Receive the next value
   }
   delay(100);
